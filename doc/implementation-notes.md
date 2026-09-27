@@ -95,5 +95,4 @@ No Playwright fuzz suite; `npm run lint && npm run check && npm run build` is th
 
 ## Multi-screen simulations
 
-This sim is single-screen. If it ever grows screens, see `doc/multi-screen.md` for the fleet
-pattern.
+This sim is single-screen. If it ever grows screens, follow [SceneryStackTemplate `doc/multi-screen.md`](https://github.com/OpenLyceum/SceneryStackTemplate/blob/main/doc/multi-screen.md).
