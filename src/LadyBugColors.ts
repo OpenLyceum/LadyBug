@@ -3,10 +3,6 @@ import LadyBugNamespace from "./LadyBugNamespace.js";
 
 const { BLACK, WHITE } = Color;
 
-function profileColor(name: string, def: Color | string, projector: Color | string): ProfileColorProperty {
-  return new ProfileColorProperty(LadyBugNamespace, name, { default: def, projector });
-}
-
 // ── Panel fill colors ─────────────────────────────────────────────────────────
 // Near-black / near-white neutral fills so panels contrast with both themes.
 const PANEL_FILL_DARK = new Color(40, 40, 40);
@@ -42,57 +38,126 @@ const SEEK_TRACK_LIGHT = new Color(200, 200, 200);
 const SEEK_HANDLE_LIGHT = new Color(80, 80, 80);
 
 const LadyBugColors = {
-  backgroundColorProperty: profileColor("background", BLACK, WHITE),
-  foregroundColorProperty: profileColor("foreground", WHITE, BLACK),
-  panelFillProperty: profileColor("panelFill", PANEL_FILL_DARK, PANEL_FILL_LIGHT),
-  panelStrokeProperty: profileColor("panelStroke", PANEL_STROKE_DARK, PANEL_STROKE_LIGHT),
+  backgroundColorProperty: new ProfileColorProperty(LadyBugNamespace, "background", {
+    default: BLACK,
+    projector: WHITE,
+  }),
+  foregroundColorProperty: new ProfileColorProperty(LadyBugNamespace, "foreground", {
+    default: WHITE,
+    projector: BLACK,
+  }),
+  panelFillProperty: new ProfileColorProperty(LadyBugNamespace, "panelFill", {
+    default: PANEL_FILL_DARK,
+    projector: PANEL_FILL_LIGHT,
+  }),
+  panelStrokeProperty: new ProfileColorProperty(LadyBugNamespace, "panelStroke", {
+    default: PANEL_STROKE_DARK,
+    projector: PANEL_STROKE_LIGHT,
+  }),
 
   // Motion vectors. Dark mode uses lighter/brighter variants for contrast against dark buttons.
-  positionVectorProperty: profileColor("positionVector", "#6EB5FF", "#1A5B9E"),
-  velocityVectorProperty: profileColor("velocityVector", "#FF7572", "#A51A16"),
-  accelerationVectorProperty: profileColor("accelerationVector", "#5CD65C", "#1B6B1B"),
+  positionVectorProperty: new ProfileColorProperty(LadyBugNamespace, "positionVector", {
+    default: "#6EB5FF",
+    projector: "#1A5B9E",
+  }),
+  velocityVectorProperty: new ProfileColorProperty(LadyBugNamespace, "velocityVector", {
+    default: "#FF7572",
+    projector: "#A51A16",
+  }),
+  accelerationVectorProperty: new ProfileColorProperty(LadyBugNamespace, "accelerationVector", {
+    default: "#5CD65C",
+    projector: "#1B6B1B",
+  }),
 
   // The ladybug itself.
-  ladybugBodyProperty: profileColor("ladybugBody", "#D8262B", "#C81E22"),
+  ladybugBodyProperty: new ProfileColorProperty(LadyBugNamespace, "ladybugBody", {
+    default: "#D8262B",
+    projector: "#C81E22",
+  }),
   // Spots stay pure black in both profiles (ink on the red elytra).
-  ladybugSpotsProperty: profileColor("ladybugSpots", BLACK, BLACK),
-  ladybugHeadProperty: profileColor("ladybugHead", HEAD_FILL_DARK, BLACK),
-  ladybugWingSeamProperty: profileColor("ladybugWingSeam", WING_SEAM_FILL_DARK, BLACK),
-  ladybugAntennaeProperty: profileColor("ladybugAntennae", ANTENNA_FILL_DARK, BLACK),
+  ladybugSpotsProperty: new ProfileColorProperty(LadyBugNamespace, "ladybugSpots", {
+    default: BLACK,
+    projector: BLACK,
+  }),
+  ladybugHeadProperty: new ProfileColorProperty(LadyBugNamespace, "ladybugHead", {
+    default: HEAD_FILL_DARK,
+    projector: BLACK,
+  }),
+  ladybugWingSeamProperty: new ProfileColorProperty(LadyBugNamespace, "ladybugWingSeam", {
+    default: WING_SEAM_FILL_DARK,
+    projector: BLACK,
+  }),
+  ladybugAntennaeProperty: new ProfileColorProperty(LadyBugNamespace, "ladybugAntennae", {
+    default: ANTENNA_FILL_DARK,
+    projector: BLACK,
+  }),
 
   // The motion trace — flips with the theme so it stays visible on the background.
-  traceProperty: profileColor("trace", WHITE, BLACK),
+  traceProperty: new ProfileColorProperty(LadyBugNamespace, "trace", { default: WHITE, projector: BLACK }),
 
   // Remote-control pad.
-  remotePadFillProperty: profileColor("remotePadFill", REMOTE_PAD_FILL_DARK, REMOTE_PAD_FILL_LIGHT),
-  tabButtonFillProperty: profileColor("tabButtonFill", TAB_BUTTON_FILL_DARK, TAB_BUTTON_FILL_LIGHT),
+  remotePadFillProperty: new ProfileColorProperty(LadyBugNamespace, "remotePadFill", {
+    default: REMOTE_PAD_FILL_DARK,
+    projector: REMOTE_PAD_FILL_LIGHT,
+  }),
+  tabButtonFillProperty: new ProfileColorProperty(LadyBugNamespace, "tabButtonFill", {
+    default: TAB_BUTTON_FILL_DARK,
+    projector: TAB_BUTTON_FILL_LIGHT,
+  }),
 
   // "Return ladybug" button — slightly darker yellow in projector for white backgrounds.
-  returnButtonFillProperty: profileColor("returnButtonFill", "#F6E652", "#D4C020"),
+  returnButtonFillProperty: new ProfileColorProperty(LadyBugNamespace, "returnButtonFill", {
+    default: "#F6E652",
+    projector: "#D4C020",
+  }),
 
   // Seek bar / playback timeline.
-  seekBarTrackProperty: profileColor("seekBarTrack", SEEK_TRACK_DARK, SEEK_TRACK_LIGHT),
+  seekBarTrackProperty: new ProfileColorProperty(LadyBugNamespace, "seekBarTrack", {
+    default: SEEK_TRACK_DARK,
+    projector: SEEK_TRACK_LIGHT,
+  }),
   // Progress fill — deeper blue in projector for contrast on the light track.
-  seekBarProgressProperty: profileColor("seekBarProgress", "#2575BA", "#1565A0"),
-  seekBarHandleProperty: profileColor("seekBarHandle", WHITE, SEEK_HANDLE_LIGHT),
+  seekBarProgressProperty: new ProfileColorProperty(LadyBugNamespace, "seekBarProgress", {
+    default: "#2575BA",
+    projector: "#1565A0",
+  }),
+  seekBarHandleProperty: new ProfileColorProperty(LadyBugNamespace, "seekBarHandle", {
+    default: WHITE,
+    projector: SEEK_HANDLE_LIGHT,
+  }),
 
   // Fleet-standard aliases for shared Panel + ButtonOptions modules.
-  panelBackgroundColorProperty: profileColor("panelBackground", PANEL_FILL_DARK, PANEL_FILL_LIGHT),
-  panelBorderColorProperty: profileColor("panelBorder", PANEL_STROKE_DARK, PANEL_STROKE_LIGHT),
-  textColorProperty: profileColor("text", WHITE, BLACK),
+  panelBackgroundColorProperty: new ProfileColorProperty(LadyBugNamespace, "panelBackground", {
+    default: PANEL_FILL_DARK,
+    projector: PANEL_FILL_LIGHT,
+  }),
+  panelBorderColorProperty: new ProfileColorProperty(LadyBugNamespace, "panelBorder", {
+    default: PANEL_STROKE_DARK,
+    projector: PANEL_STROKE_LIGHT,
+  }),
+  textColorProperty: new ProfileColorProperty(LadyBugNamespace, "text", { default: WHITE, projector: BLACK }),
 
   // ── Light control surfaces ───────────────────────────────────────────────────
   // White chrome (combo boxes, flat push buttons, editable input fields) stays light
   // in both profiles; its text stays dark.
 
   /** Fill of light control surfaces: combo-box button/list, editable input fields. */
-  controlSurfaceColorProperty: profileColor("controlSurface", "#ffffff", "#ffffff"),
+  controlSurfaceColorProperty: new ProfileColorProperty(LadyBugNamespace, "controlSurface", {
+    default: "#ffffff",
+    projector: "#ffffff",
+  }),
 
   /** Fill of a disabled control surface (grayed-out editable input field). */
-  controlSurfaceDisabledColorProperty: profileColor("controlSurfaceDisabled", "#cccccc", "#cccccc"),
+  controlSurfaceDisabledColorProperty: new ProfileColorProperty(LadyBugNamespace, "controlSurfaceDisabled", {
+    default: "#cccccc",
+    projector: "#cccccc",
+  }),
 
   /** Text on light control surfaces: combo items, flat-button labels, field values, preferences. */
-  controlSurfaceTextColorProperty: profileColor("controlSurfaceText", "#1a1a1a", "#1a1a1a"),
+  controlSurfaceTextColorProperty: new ProfileColorProperty(LadyBugNamespace, "controlSurfaceText", {
+    default: "#1a1a1a",
+    projector: "#1a1a1a",
+  }),
 };
 
 export default LadyBugColors;
