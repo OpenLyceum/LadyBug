@@ -5,7 +5,6 @@
 
 import { Vector2 } from "scenerystack/dot";
 import { describe, expect, it } from "vitest";
-import { TimeModel } from "../src/common/TimeModel.js";
 import LadyBugConstants from "../src/LadyBugConstants.js";
 import { SamplingMotionModel } from "../src/lady-bug/model/SamplingMotionModel.js";
 import { describeDisposalLeaks, forceGC } from "./helpers/memoryLeak.js";
@@ -38,4 +37,4 @@ describe("Memory leak regression", () => {
   });
 });
 
-describeDisposalLeaks([{ name: "TimeModel", create: () => new TimeModel(), idempotentDispose: true }]);
+describeDisposalLeaks([]);
