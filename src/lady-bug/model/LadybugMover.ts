@@ -10,7 +10,7 @@
 
 import { type Bounds2, Vector2 } from "scenerystack/dot";
 import LadyBugConstants from "../../LadyBugConstants.js";
-import type Ladybug from "./Ladybug.js";
+import type { Ladybug } from "./Ladybug.js";
 import { MotionType } from "./MotionType.js";
 
 /** What the mover needs from the simulation model (decouples it from LadyBugModel). */
@@ -27,7 +27,7 @@ export interface MoverContext {
   initManual(): void;
 }
 
-export default class LadybugMover {
+export class LadybugMover {
   private motionType: MotionType = MotionType.MANUAL;
   private elapsedEllipticalTime = 0;
   private readonly context: MoverContext;

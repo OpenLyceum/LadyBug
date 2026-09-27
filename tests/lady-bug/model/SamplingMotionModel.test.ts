@@ -1,7 +1,7 @@
 import { Vector2 } from "scenerystack/dot";
 import { describe, expect, it } from "vitest";
 import LadyBugConstants from "../../../src/LadyBugConstants.js";
-import SamplingMotionModel from "../../../src/lady-bug/model/SamplingMotionModel.js";
+import { SamplingMotionModel } from "../../../src/lady-bug/model/SamplingMotionModel.js";
 
 describe("SamplingMotionModel", () => {
   const { SAMPLING_HALF_WINDOW, SAMPLING_NUM_AVERAGED } = LadyBugConstants;

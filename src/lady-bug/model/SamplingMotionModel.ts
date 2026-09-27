@@ -88,7 +88,7 @@ class SamplingMotionModelValue {
   }
 }
 
-export default class SamplingMotionModel {
+export class SamplingMotionModel {
   private readonly x: SamplingMotionModelValue;
   private readonly y: SamplingMotionModelValue;
 

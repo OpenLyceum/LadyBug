@@ -5,9 +5,9 @@
  */
 
 import { Vector2 } from "scenerystack/dot";
-import type Ladybug from "./Ladybug.js";
+import type { Ladybug } from "./Ladybug.js";
 
-export default class LadybugStateRecord {
+export class LadybugStateRecord {
   public time = 0;
   public position = new Vector2(0, 0);
   public velocity = new Vector2(0, 0);

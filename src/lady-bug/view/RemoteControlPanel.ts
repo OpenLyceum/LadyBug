@@ -78,7 +78,7 @@ const COLOR_BY_MODE = {
   [UpdateMode.ACCELERATION]: LadyBugColors.accelerationVectorProperty,
 };
 
-export default class RemoteControlPanel extends Panel {
+export class RemoteControlPanel extends Panel {
   private readonly selectedModeProperty: Property<UpdateMode>;
 
   public constructor(model: LadyBugModel) {

@@ -31,7 +31,7 @@ const HANDLE_STROKE = "rgba(0,0,0,0.4)";
 const SEEK_KEY_DELTA = 8;
 const SEEK_KEY_SHIFT_DELTA = 2;
 
-export default class SeekBar extends Node {
+export class SeekBar extends Node {
   public constructor(model: LadyBugModel, width: number) {
     super({
       tagName: "div",

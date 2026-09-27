@@ -26,7 +26,7 @@ const DOT_RADIUS = 2;
 // Stroke width (px) used when drawing the trace as a continuous line.
 const LINE_STROKE_WIDTH = 3;
 
-export default class LadybugTraceNode extends CanvasNode {
+export class LadybugTraceNode extends CanvasNode {
   private readonly model: LadyBugModel;
   private readonly modelViewTransform: ModelViewTransform2;
 

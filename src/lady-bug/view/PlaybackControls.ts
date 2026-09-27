@@ -36,7 +36,7 @@ function labelText(stringProperty: TReadOnlyProperty<string>): Node {
   return new Text(stringProperty, { font: LABEL_FONT, fill: LadyBugColors.foregroundColorProperty });
 }
 
-export default class PlaybackControls extends HBox {
+export class PlaybackControls extends HBox {
   public constructor(model: LadyBugModel) {
     const playback = StringManager.getInstance().getPlaybackStrings();
     const a11y = StringManager.getInstance().getA11yStrings();

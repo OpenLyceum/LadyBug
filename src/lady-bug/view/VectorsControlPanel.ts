@@ -53,7 +53,7 @@ function labelText(stringProperty: TReadOnlyProperty<string>): Node {
   return new Text(stringProperty, { font: LABEL_FONT, fill: LadyBugColors.foregroundColorProperty });
 }
 
-export default class VectorsControlPanel extends Panel {
+export class VectorsControlPanel extends Panel {
   public constructor(model: LadyBugModel) {
     const strings = StringManager.getInstance();
     const vectors = strings.getVectorsStrings();

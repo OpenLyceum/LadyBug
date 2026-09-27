@@ -13,13 +13,13 @@ import LadyBugColors from "../../LadyBugColors.js";
 import LadyBugConstants from "../../LadyBugConstants.js";
 import type { LadyBugModel } from "../model/LadyBugModel.js";
 import { LadyBugScreenSummaryContent } from "./LadyBugScreenSummaryContent.js";
-import LadybugNode from "./LadybugNode.js";
-import LadybugTraceNode from "./LadybugTraceNode.js";
-import LadybugVectorsNode from "./LadybugVectorsNode.js";
-import PlaybackControls from "./PlaybackControls.js";
-import RemoteControlPanel from "./RemoteControlPanel.js";
-import SeekBar from "./SeekBar.js";
-import VectorsControlPanel from "./VectorsControlPanel.js";
+import { LadybugNode } from "./LadybugNode.js";
+import { LadybugTraceNode } from "./LadybugTraceNode.js";
+import { LadybugVectorsNode } from "./LadybugVectorsNode.js";
+import { PlaybackControls } from "./PlaybackControls.js";
+import { RemoteControlPanel } from "./RemoteControlPanel.js";
+import { SeekBar } from "./SeekBar.js";
+import { VectorsControlPanel } from "./VectorsControlPanel.js";
 
 type LadyBugScreenViewOptions = ScreenViewOptions & { tandem: Tandem };
 

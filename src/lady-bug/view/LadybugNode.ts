@@ -95,7 +95,7 @@ const ANTENNA_STROKE_WIDTH = 0.025;
 // Radius (cm) of the small ball at the tip of each antenna.
 const ANTENNA_TIP_RADIUS = 0.035;
 
-export default class LadybugNode extends Node {
+export class LadybugNode extends Node {
   public constructor(model: LadyBugModel, modelViewTransform: ModelViewTransform2) {
     const a11y = StringManager.getInstance().getA11yStrings();
     super({

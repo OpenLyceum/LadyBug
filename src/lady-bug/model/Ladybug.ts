@@ -9,7 +9,7 @@ import { NumberProperty } from "scenerystack/axon";
 import { Bounds2, Vector2, Vector2Property } from "scenerystack/dot";
 import LadyBugConstants from "../../LadyBugConstants.js";
 
-export default class Ladybug {
+export class Ladybug {
   public readonly positionProperty = new Vector2Property(new Vector2(0, 0));
   public readonly velocityProperty = new Vector2Property(new Vector2(0, 0));
   public readonly accelerationProperty = new Vector2Property(new Vector2(0, 0));

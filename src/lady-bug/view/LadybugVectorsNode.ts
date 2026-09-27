@@ -28,7 +28,7 @@ const ARROW_OPTIONS = {
   stroke: null,
 } as const;
 
-export default class LadybugVectorsNode extends Node {
+export class LadybugVectorsNode extends Node {
   public constructor(model: LadyBugModel, modelViewTransform: ModelViewTransform2) {
     super();
 
