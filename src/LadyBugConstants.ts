@@ -4,6 +4,7 @@
  * Numeric physics and layout constants, ported from the original Ladybug Motion sim.
  * Colors live in LadyBugColors; user-facing strings live in StringManager.
  */
+import LadyBugNamespace from "./LadyBugNamespace.js";
 
 const LadyBugConstants = {
   // The model runs on a fixed internal timestep. The original sim stepped at a fixed
@@ -88,6 +89,8 @@ const LadyBugConstants = {
   // Usage: n = floor(ELLIPTICAL_STEPS_PER_SECOND × dt);  t += 2π / n  per fixed step.
   ELLIPTICAL_STEPS_PER_SECOND: (79 / 0.015) * 0.7 * 5,
 } as const;
+
+LadyBugNamespace.register("LadyBugConstants", LadyBugConstants);
 
 export default LadyBugConstants;
 
