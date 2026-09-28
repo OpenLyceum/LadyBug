@@ -1,9 +1,9 @@
 /**
  * LadyBugPreferencesModel.ts
  *
- * Sim-specific preferences (Preferences → Simulation) for Ladybug Motion. Each
- * preference Property takes its initial value from the corresponding query
- * parameter in ladyBugQueryParameters.
+ * Model for the simulation-specific preferences shown in Preferences →
+ * Simulation. Each preference Property takes its initial value from the
+ * corresponding query parameter in ladyBugQueryParameters.
  */
 
 import { BooleanProperty } from "scenerystack/axon";
