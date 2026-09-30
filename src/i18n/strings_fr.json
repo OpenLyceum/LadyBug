@@ -65,6 +65,13 @@
       "accelerationName": "Vecteur accélération"
     }
   },
+  "keyboardHelp": {
+    "seekHeading": "Position de lecture",
+    "seekMove": "Déplacer la position de lecture",
+    "seekMoveDescription": "Déplacez le curseur de lecture vers la gauche ou la droite.",
+    "seekSlower": "Déplacer par plus petits pas",
+    "seekSlowerDescription": "Maintenez Maj pour déplacer le curseur de lecture par plus petits pas."
+  },
   "preferences": {
     "title": "Simulation",
     "showVelocity": "Afficher la vitesse",

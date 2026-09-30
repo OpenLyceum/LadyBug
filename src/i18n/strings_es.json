@@ -65,6 +65,13 @@
       "accelerationName": "Vector de aceleración"
     }
   },
+  "keyboardHelp": {
+    "seekHeading": "Posición de reproducción",
+    "seekMove": "Mover la posición de reproducción",
+    "seekMoveDescription": "Mueve el control de reproducción a la izquierda o a la derecha.",
+    "seekSlower": "Mover en pasos más pequeños",
+    "seekSlowerDescription": "Mantén Mayús para mover el control de reproducción en pasos más pequeños."
+  },
   "preferences": {
     "title": "Simulación",
     "showVelocity": "Mostrar velocidad",

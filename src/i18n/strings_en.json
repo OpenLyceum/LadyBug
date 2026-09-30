@@ -65,6 +65,13 @@
       "accelerationName": "Acceleration vector"
     }
   },
+  "keyboardHelp": {
+    "seekHeading": "Playback position",
+    "seekMove": "Move the playback position",
+    "seekMoveDescription": "Move the playback handle left or right.",
+    "seekSlower": "Move in smaller steps",
+    "seekSlowerDescription": "Hold Shift to move the playback handle in smaller steps."
+  },
   "preferences": {
     "title": "Simulation",
     "showVelocity": "Show Velocity",

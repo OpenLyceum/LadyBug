@@ -88,6 +88,10 @@ export class StringManager {
     return stringProperties.returnLadybugStringProperty;
   }
 
+  public getKeyboardHelpStrings() {
+    return stringProperties.keyboardHelp;
+  }
+
   /** Simulation-specific preference labels shown in Preferences → Simulation. */
   public getPreferences() {
     return stringProperties.preferences;
