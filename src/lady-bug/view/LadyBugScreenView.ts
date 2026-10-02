@@ -110,20 +110,29 @@ export class LadyBugScreenView extends ScreenView {
       accessibleName: StringManager.getInstance().getA11yStrings().controls.resetAllStringProperty,
     });
 
-    // Position everything.
-    vectorsControlPanel.right = layoutBounds.maxX - MARGIN;
-    vectorsControlPanel.top = MARGIN;
-    remoteControlPanel.right = layoutBounds.maxX - MARGIN;
-    remoteControlPanel.top = vectorsControlPanel.bottom + MARGIN;
+    // Position everything, and again whenever a piece changes size: with the
+    // runtime language switch a longer translation widens a panel or the
+    // playback row, and fixed positions would push it past the margin.
+    const layout = (): void => {
+      vectorsControlPanel.right = layoutBounds.maxX - MARGIN;
+      vectorsControlPanel.top = MARGIN;
+      remoteControlPanel.right = layoutBounds.maxX - MARGIN;
+      remoteControlPanel.top = vectorsControlPanel.bottom + MARGIN;
 
-    returnButton.centerX = playAreaCenterX;
-    returnButton.top = MARGIN;
+      returnButton.centerX = playAreaCenterX;
+      returnButton.top = MARGIN;
 
-    seekBar.centerX = playAreaCenterX;
-    // Place the seek bar at the top of the bottom-controls band, offset by one MARGIN.
-    seekBar.bottom = layoutBounds.maxY - BOTTOM_CONTROLS_HEIGHT + MARGIN;
-    playbackControls.centerX = playAreaCenterX;
-    playbackControls.bottom = layoutBounds.maxY - MARGIN;
+      seekBar.centerX = playAreaCenterX;
+      // Place the seek bar at the top of the bottom-controls band, offset by one MARGIN.
+      seekBar.bottom = layoutBounds.maxY - BOTTOM_CONTROLS_HEIGHT + MARGIN;
+      playbackControls.centerX = playAreaCenterX;
+      playbackControls.bottom = layoutBounds.maxY - MARGIN;
+    };
+    // These nodes live as long as the screen, so the links are never removed.
+    for (const node of [vectorsControlPanel, remoteControlPanel, returnButton, seekBar, playbackControls]) {
+      node.localBoundsProperty.lazyLink(layout);
+    }
+    layout();
 
     this.children = [
       traceNode,

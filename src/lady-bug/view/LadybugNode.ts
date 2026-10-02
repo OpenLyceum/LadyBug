@@ -19,6 +19,9 @@ import type { LadyBugModel } from "../model/LadyBugModel.js";
 import { MotionType } from "../model/MotionType.js";
 import { UpdateMode } from "../model/UpdateMode.js";
 
+/** How far the ladybug's touch area reaches past its drawn bounds, px. */
+const TOUCH_DILATION = 8;
+
 // Spot centres (cm) on one side of the body; mirrored to the other side.
 const SPOT_POSITIONS: ReadonlyArray<readonly [number, number]> = [
   [0.09, -0.05],
@@ -145,6 +148,9 @@ export class LadybugNode extends Node {
       model.motionTypeProperty.value = MotionType.MANUAL;
       model.updateModeProperty.value = UpdateMode.POSITION;
     };
+
+    // A slightly larger target than the drawn bug, for touch.
+    this.touchArea = this.localBounds.dilated(TOUCH_DILATION);
 
     this.addInputListener(
       new RichDragListener({

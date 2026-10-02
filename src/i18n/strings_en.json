@@ -51,8 +51,8 @@
       "playPauseStart": "Play",
       "playPauseEnd": "Pause",
       "stepForward": "Step forward",
-      "stepBackward": "Step backward",
-      "resetAll": "Reset All"
+      "resetAll": "Reset All",
+      "rewind": "Rewind to the start"
     },
     "trace": {
       "nodeName": "Motion path trace",

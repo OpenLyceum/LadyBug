@@ -11,6 +11,10 @@ import { StringManager } from "../../i18n/StringManager.js";
 import LadyBugColors from "../../LadyBugColors.js";
 import type { LadyBugModel } from "../model/LadyBugModel.js";
 
+/** How far the seek handle's touch and mouse areas reach past its drawn edge, px. */
+const HANDLE_TOUCH_DILATION = 10;
+const HANDLE_MOUSE_DILATION = 4;
+
 // Height (px) of the seek-bar track and progress fill.
 const BAR_HEIGHT = 10;
 
@@ -114,6 +118,9 @@ export class SeekBar extends Node {
     // Pointer drag grabs the handle; the keyboard half goes on `this`, the focusable Node.
     // hotkeyManager only activates hotkeys for listeners on Nodes in the focus trail, so a
     // listener on the (non-focusable) handle would never see an arrow key.
+    // The handle is narrow; a larger target makes it easy to grab by touch.
+    handle.touchArea = handle.localBounds.dilated(HANDLE_TOUCH_DILATION);
+    handle.mouseArea = handle.localBounds.dilated(HANDLE_MOUSE_DILATION);
     handle.addInputListener(seekListener.dragListener);
     this.addInputListener(seekListener.keyboardDragListener);
     track.addInputListener(

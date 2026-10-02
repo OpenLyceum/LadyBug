@@ -344,14 +344,20 @@ export class LadyBugModel implements TModel, MoverContext {
     }
   }
 
+  /**
+   * Goes back to t = 0 without discarding anything. In record mode this switches
+   * to playback (whose listener rewinds), so the recording is kept for replay
+   * rather than silently erased; Clear is the only button that erases it.
+   */
   public rewind(): void {
     this.pause();
+    if (this.recordingProperty.value) {
+      this.recordingProperty.value = false;
+      return;
+    }
     this.time = 0;
     this.timeProperty.value = 0;
     this.applyPlaybackState();
-    if (this.recordingProperty.value) {
-      this.clearHistory();
-    }
   }
 
   public setTime(time: number): void {

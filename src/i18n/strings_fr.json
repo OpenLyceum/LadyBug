@@ -51,8 +51,8 @@
       "playPauseStart": "Lecture",
       "playPauseEnd": "Pause",
       "stepForward": "Avancer d'un pas",
-      "stepBackward": "Reculer d'un pas",
-      "resetAll": "Tout réinitialiser"
+      "resetAll": "Tout réinitialiser",
+      "rewind": "Revenir au début"
     },
     "trace": {
       "nodeName": "Trace du trajet",

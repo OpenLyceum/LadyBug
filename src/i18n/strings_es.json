@@ -51,8 +51,8 @@
       "playPauseStart": "Reproducir",
       "playPauseEnd": "Pausa",
       "stepForward": "Avanzar un paso",
-      "stepBackward": "Retroceder un paso",
-      "resetAll": "Restablecer todo"
+      "resetAll": "Restablecer todo",
+      "rewind": "Volver al inicio"
     },
     "trace": {
       "nodeName": "Traza del movimiento",

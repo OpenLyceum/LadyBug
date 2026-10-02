@@ -169,10 +169,11 @@ export class RemoteControlPanel extends Panel {
       const ladybug = model.ladybug;
       let tip: Vector2;
       if (selectedModeProperty.value === UpdateMode.POSITION) {
+        // The same scale as apply() below (the play area's smaller side), so a
+        // released knob stays where it was dropped instead of jumping.
         const bounds = model.getBounds();
-        const bw = bounds.width || 1;
-        const bh = bounds.height || 1;
-        tip = new Vector2((ladybug.position.x / bw) * AREA, (ladybug.position.y / bh) * AREA);
+        const minDim = Math.min(bounds.width, bounds.height) || 1;
+        tip = new Vector2((ladybug.position.x / minDim) * AREA, (ladybug.position.y / minDim) * AREA);
       } else if (selectedModeProperty.value === UpdateMode.VELOCITY) {
         tip = ladybug.velocity.timesScalar(AREA);
       } else {

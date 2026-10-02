@@ -58,7 +58,7 @@ export class PlaybackControls extends HBox {
     const rewindButton = new StepBackwardButton({
       radius: TRANSPORT_BUTTON_RADIUS,
       listener: () => model.rewind(),
-      accessibleName: a11y.controls.stepBackwardStringProperty,
+      accessibleName: a11y.controls.rewindStringProperty,
     });
 
     const playPauseButton = new PlayPauseButton(model.isPlayingProperty, {
