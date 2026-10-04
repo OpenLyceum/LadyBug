@@ -18,7 +18,7 @@ describe("SamplingMotionModel", () => {
     expect(model.getVelocity().y).toBeCloseTo(0, 6);
   });
 
-  it("reset clears motion after restabilizing at the reset point", () => {
+  it("reset immediately clears motion at the reset point", () => {
     const model = new SamplingMotionModel(SAMPLING_HALF_WINDOW, SAMPLING_NUM_AVERAGED, 0, 0);
     const numPoints = 3 * SAMPLING_NUM_AVERAGED + 2 * SAMPLING_HALF_WINDOW;
 
@@ -28,9 +28,9 @@ describe("SamplingMotionModel", () => {
     expect(model.getVelocity().x).toBeGreaterThan(0);
 
     model.reset(new Vector2(3, 4));
-    for (let i = 0; i < numPoints + 5; i++) {
-      model.addPointAndUpdate(new Vector2(3, 4));
-    }
+    expect(model.getAverageMid().equals(new Vector2(3, 4))).toBe(true);
+    expect(model.getVelocity().equals(Vector2.ZERO)).toBe(true);
+    expect(model.getAcceleration().equals(Vector2.ZERO)).toBe(true);
 
     expect(model.getVelocity().x).toBeCloseTo(0, 6);
     expect(model.getVelocity().y).toBeCloseTo(0, 6);

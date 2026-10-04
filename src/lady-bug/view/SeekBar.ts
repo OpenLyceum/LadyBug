@@ -71,8 +71,8 @@ export class SeekBar extends Node {
     };
 
     const updateHandle = (): void => {
-      const furthest = model.furthestRecordedTimeProperty.value;
-      const percent = furthest > 0 ? Math.min(1, model.timeProperty.value / furthest) : 0;
+      const max = maxTime();
+      const percent = max > 0 ? Math.min(1, model.timeProperty.value / max) : 0;
       handle.centerX = percent * width;
       handle.centerY = BAR_HEIGHT / 2;
     };

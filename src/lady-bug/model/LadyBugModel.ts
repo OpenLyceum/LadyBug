@@ -118,7 +118,10 @@ export class LadyBugModel implements TModel, MoverContext {
   }
 
   private stepInternal(deltaTime: number): void {
-    this.time += deltaTime;
+    this.time = Math.min(
+      this.time + deltaTime,
+      this.recordingProperty.value ? this.maxRecordingTime : this.furthestRecordedTimeProperty.value,
+    );
     this.timeProperty.value = this.time;
 
     if (this.recordingProperty.value) {
@@ -129,12 +132,6 @@ export class LadyBugModel implements TModel, MoverContext {
   }
 
   private stepRecording(deltaTime: number): void {
-    if (this.time >= LadyBugConstants.MAX_RECORDING_TIME) {
-      this.time = LadyBugConstants.MAX_RECORDING_TIME;
-      this.timeProperty.value = this.time;
-      this.recordingProperty.value = false;
-      return;
-    }
     this.mover.update(deltaTime);
     this.recordCurrentPenPoint();
     this.trimSampleHistory();
@@ -143,6 +140,11 @@ export class LadyBugModel implements TModel, MoverContext {
     }
     this.recordState();
     this.furthestRecordedTimeProperty.value = this.time;
+    if (this.time >= this.maxRecordingTime) {
+      this.pause();
+      this.timeAccumulator = 0;
+      this.recordingProperty.value = false;
+    }
   }
 
   private stepPlayback(): void {
@@ -240,7 +242,7 @@ export class LadyBugModel implements TModel, MoverContext {
 
   public clearSampleHistory(): void {
     this.penPath.length = 0;
-    this.penPoint = new Vector2(0, 0);
+    this.penPoint = this.ladybug.position.copy();
   }
 
   public resetSamplingMotionModel(): void {
@@ -339,6 +341,8 @@ export class LadyBugModel implements TModel, MoverContext {
     this.furthestRecordedTimeProperty.value = 0;
     this.recordingProperty.value = true;
     this.clearHistory();
+    this.resetSamplingMotionModel();
+    this.timeAccumulator = 0;
     if (wasPlaying) {
       this.play();
     }
@@ -361,8 +365,9 @@ export class LadyBugModel implements TModel, MoverContext {
   }
 
   public setTime(time: number): void {
-    this.time = time;
-    this.timeProperty.value = time;
+    this.time = Math.max(0, Math.min(time, this.furthestRecordedTimeProperty.value));
+    this.timeProperty.value = this.time;
+    this.timeAccumulator = 0;
     this.applyPlaybackState();
   }
 
@@ -448,10 +453,10 @@ export class LadyBugModel implements TModel, MoverContext {
     this.time = 0;
     this.timeAccumulator = 0;
     this.clearHistory();
+    this.ladybug.reset();
     this.resetSamplingMotionModel();
     this.penPoint = new Vector2(0, 0);
     this.stopSampling();
-    this.ladybug.reset();
     this.mover.reset();
   }
 }

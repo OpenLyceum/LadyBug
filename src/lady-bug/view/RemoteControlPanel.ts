@@ -212,34 +212,35 @@ export class RemoteControlPanel extends Panel {
       }
       isDragging = false;
     };
-    knob.addInputListener(
-      new RichDragListener({
-        dragListenerOptions: {
-          start: beginRemoteDrag,
-          drag: (event) => {
-            const local = padLayer.globalToLocalPoint(event.pointer.point);
-            const tip = new Vector2(clamp(local.x, -HALF, HALF), clamp(local.y, -HALF, HALF));
-            setTip(tip);
-            apply(tip);
-          },
-          end: endRemoteDrag,
+    const remoteDragListener = new RichDragListener({
+      dragListenerOptions: {
+        start: beginRemoteDrag,
+        drag: (event) => {
+          const local = padLayer.globalToLocalPoint(event.pointer.point);
+          const tip = new Vector2(clamp(local.x, -HALF, HALF), clamp(local.y, -HALF, HALF));
+          setTip(tip);
+          apply(tip);
         },
-        keyboardDragListenerOptions: {
-          dragSpeed: 120,
-          shiftDragSpeed: 40,
-          start: beginRemoteDrag,
-          drag: (_event, listener) => {
-            const tip = new Vector2(
-              clamp(knob.centerX + listener.modelDelta.x, -HALF, HALF),
-              clamp(knob.centerY + listener.modelDelta.y, -HALF, HALF),
-            );
-            setTip(tip);
-            apply(tip);
-          },
-          end: endRemoteDrag,
+        end: endRemoteDrag,
+      },
+      keyboardDragListenerOptions: {
+        dragSpeed: 120,
+        shiftDragSpeed: 40,
+        start: beginRemoteDrag,
+        drag: (_event, listener) => {
+          const tip = new Vector2(
+            clamp(knob.centerX + listener.modelDelta.x, -HALF, HALF),
+            clamp(knob.centerY + listener.modelDelta.y, -HALF, HALF),
+          );
+          setTip(tip);
+          apply(tip);
         },
-      }),
-    );
+        end: endRemoteDrag,
+      },
+    });
+    knob.addInputListener(remoteDragListener.dragListener);
+    // Keyboard hotkeys must be attached to the focusable pad, not the decorative knob.
+    pad.addInputListener(remoteDragListener.keyboardDragListener);
 
     const applyArrowColor = (): void => {
       const color = COLOR_BY_MODE[selectedModeProperty.value];

@@ -26,6 +26,10 @@ class SamplingMotionModelValue {
   }
 
   public reset(initialValue: number): void {
+    this.avgBefore = initialValue;
+    this.avgMid = initialValue;
+    this.avgNow = initialValue;
+    this.averages.length = 0;
     for (let i = 0; i < this.numPoints; i++) {
       this.values[i] = initialValue;
     }

@@ -54,11 +54,19 @@ export class LadybugTraceNode extends CanvasNode {
     const repaint = () => this.invalidatePaint();
     model.historyAddedEmitter.addListener(repaint);
     model.historyRemovedEmitter.addListener(repaint);
-    model.timeProperty.link(repaint);
-    LadyBugColors.traceProperty.link(repaint);
-    model.traceModeProperty.link((mode) => {
-      this.visible = mode !== TraceMode.OFF;
-      repaint();
+    model.timeProperty.link(repaint, { disposer: this });
+    LadyBugColors.traceProperty.link(repaint, { disposer: this });
+    model.traceModeProperty.link(
+      (mode) => {
+        this.visible = mode !== TraceMode.OFF;
+        repaint();
+      },
+      { disposer: this },
+    );
+    this.disposeEmitter.addListener(() => {
+      model.historyAddedEmitter.removeListener(repaint);
+      model.historyRemovedEmitter.removeListener(repaint);
+      traceHelpProperty.dispose();
     });
   }
 

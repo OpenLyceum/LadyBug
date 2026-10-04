@@ -81,7 +81,7 @@ Decorative knob strokes in `RemoteControlPanel` / `SeekBar` use hardcoded `rgba(
 Screen-lifetime nodes (panels, play area, chrome) persist for the app session and intentionally
 do not dispose. `SamplingMotionModel` is pure numeric state with no axon links. Dynamic
 add/remove patterns are minimal for this sim; the fleet memory-leak suite uses
-`SamplingMotionModel` as its dispose unit (see `tests/memory-leak.test.ts`).
+`SamplingMotionModel` as a drop/GC unit and `LadybugTraceNode` as a dispose unit (see `tests/memory-leak.test.ts`).
 
 ## Testing
 

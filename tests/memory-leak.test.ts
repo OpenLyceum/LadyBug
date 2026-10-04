@@ -3,10 +3,14 @@
  * SamplingMotionModel is pure numeric state (no axon links) — the dispose unit for this sim.
  */
 
-import { Vector2 } from "scenerystack/dot";
+import { Bounds2, Vector2 } from "scenerystack/dot";
+import { ModelViewTransform2 } from "scenerystack/phetcommon";
 import { describe, expect, it } from "vitest";
 import LadyBugConstants from "../src/LadyBugConstants.js";
+import { LadyBugModel } from "../src/lady-bug/model/LadyBugModel.js";
 import { SamplingMotionModel } from "../src/lady-bug/model/SamplingMotionModel.js";
+import { LadybugTraceNode } from "../src/lady-bug/view/LadybugTraceNode.js";
+import { LadyBugPreferencesModel } from "../src/preferences/LadyBugPreferencesModel.js";
 import { describeDisposalLeaks, forceGC } from "./helpers/memoryLeak.js";
 
 const SAMPLING_HALF_WINDOW: number = LadyBugConstants.SAMPLING_HALF_WINDOW;
@@ -37,4 +41,14 @@ describe("Memory leak regression", () => {
   });
 });
 
-describeDisposalLeaks([]);
+describeDisposalLeaks([
+  {
+    name: "LadybugTraceNode",
+    create: () =>
+      new LadybugTraceNode(
+        new LadyBugModel(new LadyBugPreferencesModel()),
+        ModelViewTransform2.createIdentity(),
+        new Bounds2(-5, -5, 5, 5),
+      ),
+  },
+]);
