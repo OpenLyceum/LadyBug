@@ -5,6 +5,7 @@
   },
   "vectors": {
     "title": "Vectores",
+    "showPosition": "Mostrar posición",
     "showVelocity": "Mostrar velocidad",
     "showAcceleration": "Mostrar aceleración"
   },
@@ -13,7 +14,11 @@
     "manual": "Manual",
     "linear": "Lineal",
     "circular": "Circular",
-    "elliptical": "Elíptico"
+    "elliptical": "Elíptico",
+    "radius": "Tamaño del círculo",
+    "small": "Pequeño",
+    "medium": "Mediano",
+    "large": "Grande"
   },
   "trace": {
     "title": "Trazado",
@@ -35,9 +40,9 @@
   "returnLadybug": "Devolver mariquita",
   "a11y": {
     "screenSummary": {
-      "playArea": "El área de juego muestra una mariquita que se mueve por un área bidimensional. Se pueden mostrar los vectores de velocidad y aceleración y una traza de su trayectoria.",
-      "controlArea": "Los controles eligen cómo se mueve la mariquita — arrastrada a mano o siguiendo un movimiento elegido — activan los vectores de velocidad y aceleración y la traza de la trayectoria, y graban o reproducen el movimiento. Un botón Restablecer todo devuelve la simulación a su estado inicial.",
-      "interactionHint": "Arrastra la mariquita o elige un movimiento, luego observa sus vectores de velocidad y aceleración."
+      "playArea": "El área de juego muestra una mariquita que se mueve por un área bidimensional, con una flor en el origen. Se pueden mostrar los vectores de posición, velocidad y aceleración y una traza de su trayectoria.",
+      "controlArea": "Los controles eligen cómo se mueve la mariquita — arrastrada a mano o siguiendo un movimiento elegido, con un círculo pequeño, mediano o grande para el movimiento circular — activan los vectores de posición, velocidad y aceleración y la traza de la trayectoria, y graban o reproducen el movimiento. Un botón Restablecer todo devuelve la simulación a su estado inicial.",
+      "interactionHint": "Arrastra la mariquita o elige un movimiento, luego observa sus vectores de posición, velocidad y aceleración."
     },
     "currentDetails": "La mariquita está en la posición {{x}}, {{y}} metros, moviéndose a {{speed}} metros por segundo. La simulación está {{state}}.",
     "playingLabel": "en marcha",
@@ -61,6 +66,7 @@
       "offHelp": "La traza está oculta."
     },
     "vectorArrows": {
+      "positionName": "Vector de posición",
       "velocityName": "Vector de velocidad",
       "accelerationName": "Vector de aceleración"
     }
@@ -74,6 +80,7 @@
   },
   "preferences": {
     "title": "Simulación",
+    "showPosition": "Mostrar posición",
     "showVelocity": "Mostrar velocidad",
     "showAcceleration": "Mostrar aceleración"
   }

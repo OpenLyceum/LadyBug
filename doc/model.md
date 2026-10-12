@@ -19,7 +19,7 @@ what the vectors show afterward.
 This is a port of PhET's *Ladybug Motion 2D*. It is **not** *Ladybug Revolution*: there is **no
 rotatable platform**. The only rotation in the model is the ladybug's **heading** (it turns to
 face its velocity) and the geometry of the circular-motion preset, which moves the bug around a
-fixed ring.
+fixed ring (small, medium, or large) centered on a flower at the origin.
 
 Key ideas a student should take away:
 
@@ -38,7 +38,7 @@ in **seconds**.
 
 | Quantity | Symbol | Units | Notes |
 |---|---|---|---|
-| Position | **r** = (x, y) | cm | Location in the plane; origin at the play-area center |
+| Position | **r** = (x, y) | cm | Location in the plane; origin at the play-area center (the flower); shown as a vector arrow from the origin |
 | Velocity | **v** = (vₓ, v_y) | cm/s | Rate of change of position; shown as a vector arrow |
 | Acceleration | **a** = (aₓ, a_y) | cm/s² | Rate of change of velocity; shown as a vector arrow |
 | Speed | \|**v**\| | cm/s | Magnitude of velocity |
@@ -69,8 +69,13 @@ the original PhET sim.
 
 - **Linear** — constant speed along the current heading; the bug **reflects** off the square
   scene boundary (elastic bounce).
-- **Circular** — motion at a calibrated angular rate around a ring of fixed radius centered on
-  the origin.
+- **Circular** — uniform circular motion at a calibrated angular rate ω around a ring centered on
+  the origin. The ring is **Small / Medium / Large** (0.7, 1.4, 2.1 cm — a 1 : 2 : 3 ratio).
+  Because ω is the same for every ring, the period is the same, and speed v = ωr and centripetal
+  acceleration a = ω²r = v²/r both scale **1 : 2 : 3** — easy to compare side by side. The
+  position vector points outward from the flower, velocity is tangent, and acceleration points
+  back toward the flower (antiparallel to position). Switching size mid-motion walks the bug
+  radially to the new ring before it resumes circling.
 - **Elliptical** — parametric motion on a fixed ellipse (semi-axes 2 cm and 1.4 cm).
 
 ## Control modes and record/playback

@@ -5,6 +5,7 @@
   },
   "vectors": {
     "title": "Vectors",
+    "showPosition": "Show Position",
     "showVelocity": "Show Velocity",
     "showAcceleration": "Show Acceleration"
   },
@@ -13,7 +14,11 @@
     "manual": "Manual",
     "linear": "Linear",
     "circular": "Circular",
-    "elliptical": "Elliptical"
+    "elliptical": "Elliptical",
+    "radius": "Circle Size",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large"
   },
   "trace": {
     "title": "Trace",
@@ -35,9 +40,9 @@
   "returnLadybug": "Return Ladybug",
   "a11y": {
     "screenSummary": {
-      "playArea": "The play area shows a ladybug that moves around a two-dimensional area. Velocity and acceleration vectors and a trace of its path can be shown.",
-      "controlArea": "The controls choose how the ladybug moves — dragged by hand or following a chosen motion — toggle the velocity and acceleration vectors and the path trace, and record or replay the motion. A Reset All button returns the simulation to its starting state.",
-      "interactionHint": "Drag the ladybug or choose a motion, then watch its velocity and acceleration vectors."
+      "playArea": "The play area shows a ladybug that moves around a two-dimensional area, with a flower at the origin. Position, velocity, and acceleration vectors and a trace of its path can be shown.",
+      "controlArea": "The controls choose how the ladybug moves — dragged by hand or following a chosen motion, with a small, medium, or large circle for circular motion — toggle the position, velocity, and acceleration vectors and the path trace, and record or replay the motion. A Reset All button returns the simulation to its starting state.",
+      "interactionHint": "Drag the ladybug or choose a motion, then watch its position, velocity, and acceleration vectors."
     },
     "currentDetails": "The ladybug is at position {{x}}, {{y}} meters, moving at {{speed}} meters per second. The simulation is {{state}}.",
     "playingLabel": "playing",
@@ -61,6 +66,7 @@
       "offHelp": "Trace is hidden."
     },
     "vectorArrows": {
+      "positionName": "Position vector",
       "velocityName": "Velocity vector",
       "accelerationName": "Acceleration vector"
     }
@@ -74,6 +80,7 @@
   },
   "preferences": {
     "title": "Simulation",
+    "showPosition": "Show Position",
     "showVelocity": "Show Velocity",
     "showAcceleration": "Show Acceleration"
   }

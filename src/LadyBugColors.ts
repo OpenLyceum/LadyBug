@@ -95,6 +95,16 @@ const LadyBugColors = {
   // The motion trace — flips with the theme so it stays visible on the background.
   traceProperty: new ProfileColorProperty(LadyBugNamespace, "trace", { default: WHITE, projector: BLACK }),
 
+  // The flower marking the origin (the tail of the position vector).
+  flowerPetalProperty: new ProfileColorProperty(LadyBugNamespace, "flowerPetal", {
+    default: "#F5D0F0",
+    projector: "#D45FC4",
+  }),
+  flowerCenterProperty: new ProfileColorProperty(LadyBugNamespace, "flowerCenter", {
+    default: "#FFD23F",
+    projector: "#E0A800",
+  }),
+
   // Remote-control pad.
   remotePadFillProperty: new ProfileColorProperty(LadyBugNamespace, "remotePadFill", {
     default: REMOTE_PAD_FILL_DARK,

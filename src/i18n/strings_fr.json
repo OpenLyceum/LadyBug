@@ -5,6 +5,7 @@
   },
   "vectors": {
     "title": "Vecteurs",
+    "showPosition": "Afficher la position",
     "showVelocity": "Afficher la vitesse",
     "showAcceleration": "Afficher l'accélération"
   },
@@ -13,7 +14,11 @@
     "manual": "Manuel",
     "linear": "Linéaire",
     "circular": "Circulaire",
-    "elliptical": "Elliptique"
+    "elliptical": "Elliptique",
+    "radius": "Taille du cercle",
+    "small": "Petit",
+    "medium": "Moyen",
+    "large": "Grand"
   },
   "trace": {
     "title": "Trace",
@@ -35,9 +40,9 @@
   "returnLadybug": "Ramener la coccinelle",
   "a11y": {
     "screenSummary": {
-      "playArea": "La zone de jeu montre une coccinelle qui se déplace dans une zone à deux dimensions. Les vecteurs de vitesse et d'accélération ainsi qu'une trace de son trajet peuvent être affichés.",
-      "controlArea": "Les commandes choisissent comment la coccinelle se déplace — déplacée à la main ou suivant un mouvement choisi — activent les vecteurs de vitesse et d'accélération et la trace du trajet, et enregistrent ou rejouent le mouvement. Un bouton Tout réinitialiser ramène la simulation à son état initial.",
-      "interactionHint": "Déplacez la coccinelle ou choisissez un mouvement, puis observez ses vecteurs de vitesse et d'accélération."
+      "playArea": "La zone de jeu montre une coccinelle qui se déplace dans une zone à deux dimensions, avec une fleur à l'origine. Les vecteurs position, vitesse et accélération ainsi qu'une trace de son trajet peuvent être affichés.",
+      "controlArea": "Les commandes choisissent comment la coccinelle se déplace — déplacée à la main ou suivant un mouvement choisi, avec un petit, moyen ou grand cercle pour le mouvement circulaire — activent les vecteurs position, vitesse et accélération et la trace du trajet, et enregistrent ou rejouent le mouvement. Un bouton Tout réinitialiser ramène la simulation à son état initial.",
+      "interactionHint": "Déplacez la coccinelle ou choisissez un mouvement, puis observez ses vecteurs position, vitesse et accélération."
     },
     "currentDetails": "La coccinelle est à la position {{x}}, {{y}} mètres, se déplaçant à {{speed}} mètres par seconde. La simulation est {{state}}.",
     "playingLabel": "en cours",
@@ -61,6 +66,7 @@
       "offHelp": "La trace est masquée."
     },
     "vectorArrows": {
+      "positionName": "Vecteur position",
       "velocityName": "Vecteur vitesse",
       "accelerationName": "Vecteur accélération"
     }
@@ -74,6 +80,7 @@
   },
   "preferences": {
     "title": "Simulation",
+    "showPosition": "Afficher la position",
     "showVelocity": "Afficher la vitesse",
     "showAcceleration": "Afficher l'accélération"
   }

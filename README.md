@@ -9,7 +9,8 @@ motion, position, velocity, and acceleration by dragging the ladybug or choosing
 
 - Single-screen 2D kinematics in a circular play area
 - Drag the ladybug directly, or use the **Remote Control** pad to set position, velocity, or acceleration
-- Motion presets: manual, linear, circular, and elliptical paths
+- Motion presets: manual, linear, circular (small / medium / large ring), and elliptical paths
+- Position, velocity, and acceleration vectors; the position vector starts at a flower marking the origin
 - Toggle velocity and acceleration vectors; trace the path as a line, dots, or off
 - Record and replay motion with a timeline seek bar
 - Default and projector color profiles

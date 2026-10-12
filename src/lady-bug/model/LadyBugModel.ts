@@ -14,6 +14,7 @@ import LadyBugConstants from "../../LadyBugConstants.js";
 import type { LadyBugPreferencesModel } from "../../preferences/LadyBugPreferencesModel.js";
 import ladyBugQueryParameters from "../../preferences/ladyBugQueryParameters.js";
 import { closestIndex } from "./binarySearch.js";
+import { CIRCLE_RADIUS_BY_SIZE, CircleSize } from "./CircleSize.js";
 import { Ladybug } from "./Ladybug.js";
 import { LadybugMover, type MoverContext } from "./LadybugMover.js";
 import { LadybugStateRecord } from "./LadybugStateRecord.js";
@@ -30,11 +31,13 @@ export class LadyBugModel implements TModel, MoverContext {
 
   // Observable state.
   public readonly motionTypeProperty = new Property<MotionType>(MotionType.MANUAL);
+  public readonly circleSizeProperty = new Property<CircleSize>(CircleSize.LARGE);
   public readonly updateModeProperty = new Property<UpdateMode>(UpdateMode.POSITION);
   public readonly recordingProperty = new BooleanProperty(true);
   public readonly isPlayingProperty = new BooleanProperty(false);
   public readonly timeProperty = new NumberProperty(0);
   public readonly furthestRecordedTimeProperty = new NumberProperty(0);
+  public readonly showPositionProperty = new BooleanProperty(ladyBugQueryParameters.showPosition);
   public readonly showVelocityProperty = new BooleanProperty(ladyBugQueryParameters.showVelocity);
   public readonly showAccelerationProperty = new BooleanProperty(ladyBugQueryParameters.showAcceleration);
   public readonly traceModeProperty = new EnumerationProperty(TraceMode.LINE);
@@ -96,6 +99,14 @@ export class LadyBugModel implements TModel, MoverContext {
       }
     });
     this.motionTypeProperty.lazyLink((type) => this.mover.setMotionType(type));
+    // A new ring size sends the bug back through the "move toward the ring" phase,
+    // which samples position, so start that from a clean history.
+    this.circleSizeProperty.lazyLink(() => {
+      if (this.motionTypeProperty.value === MotionType.CIRCULAR) {
+        this.clearSampleHistory();
+        this.resetSamplingMotionModel();
+      }
+    });
   }
 
   // ── Stepping ────────────────────────────────────────────────────────────────
@@ -391,6 +402,10 @@ export class LadyBugModel implements TModel, MoverContext {
     return this.bounds;
   }
 
+  public getCircleRadius(): number {
+    return CIRCLE_RADIUS_BY_SIZE[this.circleSizeProperty.value];
+  }
+
   // ── Derivative estimation ─────────────────────────────────────────────────────
 
   public estimateVelocity(): Vector2 {
@@ -434,17 +449,20 @@ export class LadyBugModel implements TModel, MoverContext {
    * construction and Reset All so the preference defaults take effect.
    */
   private applyPreferences(): void {
+    this.showPositionProperty.value = this.preferences.showPositionProperty.value;
     this.showVelocityProperty.value = this.preferences.showVelocityProperty.value;
     this.showAccelerationProperty.value = this.preferences.showAccelerationProperty.value;
   }
 
   public reset(): void {
     this.motionTypeProperty.reset();
+    this.circleSizeProperty.reset();
     this.updateModeProperty.reset();
     this.recordingProperty.reset();
     this.isPlayingProperty.reset();
     this.timeProperty.reset();
     this.furthestRecordedTimeProperty.reset();
+    this.showPositionProperty.reset();
     this.showVelocityProperty.reset();
     this.showAccelerationProperty.reset();
     this.traceModeProperty.reset();

@@ -12,6 +12,7 @@ import { StringManager } from "../../i18n/StringManager.js";
 import LadyBugColors from "../../LadyBugColors.js";
 import LadyBugConstants from "../../LadyBugConstants.js";
 import type { LadyBugModel } from "../model/LadyBugModel.js";
+import { FlowerNode } from "./FlowerNode.js";
 import { LadyBugScreenSummaryContent } from "./LadyBugScreenSummaryContent.js";
 import { LadybugNode } from "./LadybugNode.js";
 import { LadybugTraceNode } from "./LadybugTraceNode.js";
@@ -83,6 +84,7 @@ export class LadyBugScreenView extends ScreenView {
     );
     model.setBounds(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
 
+    const flowerNode = new FlowerNode(modelViewTransform);
     const traceNode = new LadybugTraceNode(model, modelViewTransform, layoutBounds);
     const ladybugNode = new LadybugNode(model, modelViewTransform);
     const vectorsNode = new LadybugVectorsNode(model, modelViewTransform);
@@ -135,6 +137,7 @@ export class LadyBugScreenView extends ScreenView {
     layout();
 
     this.children = [
+      flowerNode,
       traceNode,
       ladybugNode,
       vectorsNode,

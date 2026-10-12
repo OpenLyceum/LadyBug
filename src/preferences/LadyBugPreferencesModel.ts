@@ -12,10 +12,15 @@ import LadyBugNamespace from "../LadyBugNamespace.js";
 import ladyBugQueryParameters from "./ladyBugQueryParameters.js";
 
 export class LadyBugPreferencesModel {
+  public readonly showPositionProperty: BooleanProperty;
   public readonly showVelocityProperty: BooleanProperty;
   public readonly showAccelerationProperty: BooleanProperty;
 
   public constructor(tandem?: Tandem) {
+    this.showPositionProperty = new BooleanProperty(
+      ladyBugQueryParameters.showPosition,
+      tandem ? { tandem: tandem.createTandem("showPositionProperty") } : undefined,
+    );
     this.showVelocityProperty = new BooleanProperty(
       ladyBugQueryParameters.showVelocity,
       tandem ? { tandem: tandem.createTandem("showVelocityProperty") } : undefined,
@@ -27,6 +32,7 @@ export class LadyBugPreferencesModel {
   }
 
   public reset(): void {
+    this.showPositionProperty.reset();
     this.showVelocityProperty.reset();
     this.showAccelerationProperty.reset();
   }

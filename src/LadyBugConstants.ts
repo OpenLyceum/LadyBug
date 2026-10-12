@@ -29,7 +29,12 @@ const LadyBugConstants = {
 
   // Motion-preset constants (all calibrated for FIXED_DT).
   LINEAR_SPEED: 0.8, // cm/s
-  CIRCLE_RADIUS: 2, // cm
+  // Circular-preset ring radii (cm) for the Small / Medium / Large choices. In a 1:2:3
+  // ratio so that, at the fixed angular rate, speed (ωr) and centripetal acceleration
+  // (ω²r) also compare 1:2:3. Large keeps the whole bug inside SCENE_DIAMETER / 2.
+  CIRCLE_RADIUS_SMALL: 0.7,
+  CIRCLE_RADIUS_MEDIUM: 1.4,
+  CIRCLE_RADIUS_LARGE: 2.1,
   CIRCLE_SPEED: 0.018, // arbitrary tuned value
   ELLIPSE_A: 2, // cm
   ELLIPSE_B: 1.4, // cm

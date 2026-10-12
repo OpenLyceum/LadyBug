@@ -48,6 +48,7 @@ export class LadyBugPreferencesNode extends VBox {
       spacing: 12,
       children: [
         header,
+        checkbox(preferencesModel.showPositionProperty, prefStrings.showPositionStringProperty, "showPositionCheckbox"),
         checkbox(preferencesModel.showVelocityProperty, prefStrings.showVelocityStringProperty, "showVelocityCheckbox"),
         checkbox(
           preferencesModel.showAccelerationProperty,

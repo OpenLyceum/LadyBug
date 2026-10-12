@@ -11,7 +11,7 @@
  * 2. If it should also be user-editable at runtime, surface it as a preference
  *    in LadyBugPreferencesModel (initialize that Property from this query parameter).
  *
- * Usage: append e.g. `?showVelocity=false&showAcceleration=false` to the sim URL.
+ * Usage: append e.g. `?showPosition=true&showVelocity=false&showAcceleration=false` to the sim URL.
  */
 
 import { logGlobal } from "scenerystack/phet-core";
@@ -19,6 +19,13 @@ import { QueryStringMachine } from "scenerystack/query-string-machine";
 import LadyBugNamespace from "../LadyBugNamespace.js";
 
 const ladyBugQueryParameters = QueryStringMachine.getAll({
+  /** Whether the position vector (from the origin to the ladybug) is shown by default. */
+  showPosition: {
+    type: "boolean",
+    defaultValue: false,
+    public: true,
+  },
+
   /** Whether the velocity vector is shown by default. */
   showVelocity: {
     type: "boolean",

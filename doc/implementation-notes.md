@@ -23,7 +23,7 @@ src/
       LadybugMover.ts                                   Linear / Circular / Elliptical presets
       SamplingMotionModel.ts                            smoothed v, a from position history
       LadybugStateRecord.ts                             playback snapshot
-      MotionType.ts, UpdateMode.ts                      string-union enums
+      MotionType.ts, UpdateMode.ts, CircleSize.ts       string-union enums (CircleSize → ring radius)
       LadyBugConstants.ts, motionMath.ts, binarySearch.ts
     view/
       LadyBugScreenView.ts                              layout, mvt, PDOM, keyboard
@@ -65,8 +65,11 @@ src/
   layout. `ladybugOutOfBounds()` drives an out-of-bounds indicator when manual drag leaves the
   square model bounds.
 - **LadybugNode** — draggable sprite; drag listeners feed the model pen path.
-- **LadybugVectorsNode** — velocity/acceleration arrows gated on `showVelocityProperty` /
-  `showAccelerationProperty`.
+- **LadybugVectorsNode** — position (origin → ladybug), velocity, and acceleration arrows gated on
+  `showPositionProperty` / `showVelocityProperty` / `showAccelerationProperty`. The position arrow
+  is slimmer and drawn last: in circular motion it is collinear with the acceleration arrow.
+- **FlowerNode** — decorative, non-pickable flower at the model origin (the position vector's tail
+  and the circular rings' center).
 - **LadybugTraceNode** — line or dot trace from `culledStateHistory`; opacity fade per
   `TRACE_SECONDS_TO_BE_OLD`.
 - **RemoteControlPanel** — arrow drag for the active `UpdateMode`.

@@ -17,6 +17,8 @@ import { MotionType } from "./MotionType.js";
 export interface MoverContext {
   readonly ladybug: Ladybug;
   getBounds(): Bounds2;
+  /** Radius (cm) of the circular preset's ring, centered on the origin. */
+  getCircleRadius(): number;
   estimateAcceleration(): Vector2;
   setSamplePoint(point: Vector2): void;
   startSampling(): void;
@@ -131,8 +133,9 @@ export class LadybugMover {
     const ladybug = context.ladybug;
     const position = ladybug.position;
     const distanceFromCenter = position.magnitude;
-    const distanceFromRing = Math.abs(distanceFromCenter - LadyBugConstants.CIRCLE_RADIUS);
-    const dx = LadyBugConstants.CIRCLE_RADIUS - distanceFromCenter;
+    const r = context.getCircleRadius();
+    const distanceFromRing = Math.abs(distanceFromCenter - r);
+    const dx = r - distanceFromCenter;
     const speed = LadyBugConstants.CIRCLE_SPEED;
 
     if (distanceFromRing > speed + LadyBugConstants.CIRCULAR_RING_TOLERANCE) {
@@ -146,8 +149,9 @@ export class LadybugMover {
       // Advance clockwise (decreasing angle) by one step; see CIRCULAR_ANGULAR_RATE.
       // Math.ceil here mirrors floor(2π / -|δ|) = -ceil(2π / |δ|), preserving the
       // original step size while making the clockwise direction explicit.
+      // The angular rate is fixed, so speed (ωr) and centripetal acceleration (ω²r)
+      // both scale with the chosen radius.
       const angle = position.angle;
-      const r = LadyBugConstants.CIRCLE_RADIUS;
       const stepsPerRevolution = Math.ceil((2 * Math.PI) / (LadyBugConstants.CIRCULAR_ANGULAR_RATE * dt));
       const newAngle = angle - (2 * Math.PI) / stepsPerRevolution;
 
