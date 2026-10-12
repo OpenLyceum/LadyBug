@@ -53,7 +53,7 @@ const LadyBugConstants = {
   SAMPLING_NUM_AVERAGED: 5,
 
   // Remote-control pad: side length of the square drag area, in view pixels.
-  REMOTE_PAD_SIZE: 166,
+  REMOTE_PAD_SIZE: 130,
 
   // ── Manual (position-mode) velocity / acceleration fudge factors ─────────────
   //

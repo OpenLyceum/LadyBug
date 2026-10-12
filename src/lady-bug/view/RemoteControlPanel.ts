@@ -67,10 +67,10 @@ const PANEL_CORNER_RADIUS = 6;
 const PANEL_X_MARGIN = 12;
 
 // Vertical padding (px) inside the outer Panel.
-const PANEL_Y_MARGIN = 10;
+const PANEL_Y_MARGIN = 8;
 
 // Vertical spacing (px) between the title, tab row, and pad inside the VBox.
-const VBOX_SPACING = 8;
+const VBOX_SPACING = 6;
 
 const COLOR_BY_MODE = {
   [UpdateMode.POSITION]: LadyBugColors.positionVectorProperty,

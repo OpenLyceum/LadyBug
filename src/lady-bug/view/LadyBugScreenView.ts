@@ -1,5 +1,5 @@
 import { DerivedProperty } from "scenerystack/axon";
-import { Vector2 } from "scenerystack/dot";
+import { Bounds2, Vector2 } from "scenerystack/dot";
 import { type EmptySelfOptions, optionize } from "scenerystack/phet-core";
 import { ModelViewTransform2 } from "scenerystack/phetcommon";
 import { Node } from "scenerystack/scenery";
@@ -74,25 +74,20 @@ export class LadyBugScreenView extends ScreenView {
       scale,
     );
 
-    const topLeft = modelViewTransform.viewToModelXY(
-      playAreaCenterX - usableWidth / 2,
-      playAreaCenterY - usableHeight / 2,
-    );
-    const bottomRight = modelViewTransform.viewToModelXY(
-      playAreaCenterX + usableWidth / 2,
-      playAreaCenterY + usableHeight / 2,
-    );
-    model.setBounds(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
-
     const flowerNode = new FlowerNode(modelViewTransform);
-    const traceNode = new LadybugTraceNode(model, modelViewTransform, layoutBounds);
+    const traceNode = new LadybugTraceNode(model, modelViewTransform, this.visibleBoundsProperty.value);
     const ladybugNode = new LadybugNode(model, modelViewTransform);
     const vectorsNode = new LadybugVectorsNode(model, modelViewTransform);
 
+    // The play area grows with the window, so layout() also recomputes this after it
+    // updates the model bounds.
+    const ladybugOutOfBoundsProperty = new DerivedProperty([model.ladybug.positionProperty], () =>
+      model.ladybugOutOfBounds(),
+    );
     const returnButton = new TextPushButton(StringManager.getInstance().getReturnLadybugStringProperty(), {
       font: new PhetFont(RETURN_BUTTON_FONT_SIZE),
       baseColor: LadyBugColors.returnButtonFillProperty,
-      visibleProperty: new DerivedProperty([model.ladybug.positionProperty], () => model.ladybugOutOfBounds()),
+      visibleProperty: ladybugOutOfBoundsProperty,
       listener: () => model.returnLadybug(),
     });
 
@@ -106,19 +101,30 @@ export class LadyBugScreenView extends ScreenView {
         model.reset();
         this.reset();
       },
-      right: layoutBounds.maxX - MARGIN,
       bottom: layoutBounds.maxY - MARGIN,
       tandem: providedOptions.tandem.createTandem("resetAllButton"),
       accessibleName: StringManager.getInstance().getA11yStrings().controls.resetAllStringProperty,
     });
 
-    // Position everything, and again whenever a piece changes size: with the
-    // runtime language switch a longer translation widens a panel or the
-    // playback row, and fixed positions would push it past the margin.
+    // Position everything, and again whenever a piece changes size or the window is
+    // resized. The right-hand column and Reset All float to the right edge of the
+    // visible bounds, and the play area (trace canvas, ladybug bounds) widens with it,
+    // as in other sims. The model-view transform stays fixed so the scene never
+    // rescales; the vertical extent stays at the layout bounds so the bottom timeline
+    // keeps its place. A longer translation (runtime language switch) can also widen
+    // a panel or the playback row, so size changes trigger a re-layout too.
     const layout = (): void => {
-      vectorsControlPanel.right = layoutBounds.maxX - MARGIN;
+      const visibleBounds = this.visibleBoundsProperty.value;
+      const right = visibleBounds.maxX - MARGIN;
+
+      resetAllButton.right = right;
+      vectorsControlPanel.right = right;
       vectorsControlPanel.top = MARGIN;
-      remoteControlPanel.right = layoutBounds.maxX - MARGIN;
+
+      // Keep the remote control clear of Reset All: scale it down if the column
+      // would otherwise run into the button (e.g. a long translation).
+      remoteControlPanel.maxHeight = Math.max(1, resetAllButton.top - MARGIN - (vectorsControlPanel.bottom + MARGIN));
+      remoteControlPanel.right = right;
       remoteControlPanel.top = vectorsControlPanel.bottom + MARGIN;
 
       returnButton.centerX = playAreaCenterX;
@@ -129,12 +135,34 @@ export class LadyBugScreenView extends ScreenView {
       seekBar.bottom = layoutBounds.maxY - BOTTOM_CONTROLS_HEIGHT + MARGIN;
       playbackControls.centerX = playAreaCenterX;
       playbackControls.bottom = layoutBounds.maxY - MARGIN;
+
+      // Play area: from the visible left edge to the control column, vertically
+      // within the layout bounds above the bottom controls.
+      const columnLeft = Math.min(vectorsControlPanel.left, remoteControlPanel.left);
+      const playAreaViewBounds = new Bounds2(
+        visibleBounds.minX + MARGIN,
+        MARGIN,
+        Math.max(visibleBounds.minX + MARGIN, columnLeft - MARGIN),
+        MARGIN + usableHeight,
+      );
+      const playAreaModelBounds = modelViewTransform.viewToModelBounds(playAreaViewBounds);
+      model.setBounds(
+        playAreaModelBounds.minX,
+        playAreaModelBounds.minY,
+        playAreaModelBounds.maxX,
+        playAreaModelBounds.maxY,
+      );
+
+      traceNode.setCanvasBounds(visibleBounds);
+      traceNode.invalidatePaint();
+      ladybugOutOfBoundsProperty.recomputeDerivation();
     };
-    // These nodes live as long as the screen, so the links are never removed.
+    // These nodes and the visible-bounds Property live as long as the screen, so the
+    // links are never removed.
     for (const node of [vectorsControlPanel, remoteControlPanel, returnButton, seekBar, playbackControls]) {
       node.localBoundsProperty.lazyLink(layout);
     }
-    layout();
+    this.visibleBoundsProperty.link(layout);
 
     this.children = [
       flowerNode,
