@@ -28,9 +28,6 @@ const HANDLE_OVERHANG = 5;
 // Corner radius (px) of the seek handle rectangle.
 const HANDLE_CORNER_RADIUS = 3;
 
-// Semi-transparent border rendered around the seek handle for visual separation.
-const HANDLE_STROKE = "rgba(0,0,0,0.4)";
-
 // View-pixel step the timeline scrubs per arrow-key press; Shift is the fine step.
 const SEEK_KEY_DELTA = 8;
 const SEEK_KEY_SHIFT_DELTA = 2;
@@ -53,7 +50,7 @@ export class SeekBar extends Node {
     });
     const handle = new Rectangle(-HANDLE_WIDTH / 2, -HANDLE_OVERHANG, HANDLE_WIDTH, BAR_HEIGHT + 2 * HANDLE_OVERHANG, {
       fill: LadyBugColors.seekBarHandleProperty,
-      stroke: HANDLE_STROKE,
+      stroke: LadyBugColors.controlHandleStrokeProperty,
       cornerRadius: HANDLE_CORNER_RADIUS,
       cursor: "pointer",
     });

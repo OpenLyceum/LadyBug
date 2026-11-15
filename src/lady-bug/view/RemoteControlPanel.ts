@@ -49,9 +49,6 @@ const ARROW_TAIL_WIDTH = 5;
 // Radius (px) of the draggable knob that sits at the arrow tip.
 const KNOB_RADIUS = 9;
 
-// Semi-transparent border on the knob for visual separation from the pad background.
-const KNOB_STROKE = "rgba(0,0,0,0.4)";
-
 // ── Layout & panel styling ────────────────────────────────────────────────────
 
 // Pixel gap between the mode-selector tab buttons.
@@ -130,7 +127,7 @@ export class RemoteControlPanel extends Panel {
       tailWidth: ARROW_TAIL_WIDTH,
       stroke: null,
     });
-    const knob = new Circle(KNOB_RADIUS, { cursor: "pointer", stroke: KNOB_STROKE });
+    const knob = new Circle(KNOB_RADIUS, { cursor: "pointer", stroke: LadyBugColors.controlHandleStrokeProperty });
     const padLayer = new Node({
       clipArea: Shape.bounds(new Bounds2(-HALF, -HALF, HALF, HALF)),
       children: [arrow, knob],

@@ -55,6 +55,12 @@ const LadyBugColors = {
     projector: PANEL_STROKE_LIGHT,
   }),
 
+  // Control handles keep a translucent black outline in both profiles.
+  controlHandleStrokeProperty: new ProfileColorProperty(LadyBugNamespace, "controlHandleStroke", {
+    default: PANEL_STROKE_LIGHT,
+    projector: PANEL_STROKE_LIGHT,
+  }),
+
   // Motion vectors. Dark mode uses lighter/brighter variants for contrast against dark buttons.
   positionVectorProperty: new ProfileColorProperty(LadyBugNamespace, "positionVector", {
     default: "#6EB5FF",
