@@ -15,6 +15,7 @@ export const CircleSize = {
 
 export type CircleSize = (typeof CircleSize)[keyof typeof CircleSize];
 
+/** @internal Exported for unit tests; not part of the application API. */
 export const CIRCLE_SIZE_VALUES: CircleSize[] = [CircleSize.SMALL, CircleSize.MEDIUM, CircleSize.LARGE];
 
 /** Ring radius (cm) for each size. */
