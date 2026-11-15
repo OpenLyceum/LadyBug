@@ -98,6 +98,3 @@ const LadyBugConstants = {
 LadyBugNamespace.register("LadyBugConstants", LadyBugConstants);
 
 export default LadyBugConstants;
-
-/** Corner radius shared by themed panels (px). */
-export const PANEL_CORNER_RADIUS = 5;
