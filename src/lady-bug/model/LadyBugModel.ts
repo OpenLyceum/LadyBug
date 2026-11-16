@@ -62,7 +62,7 @@ export class LadyBugModel implements TModel, MoverContext {
   private readonly stateHistory: LadybugStateRecord[] = [];
   private readonly _culledStateHistory: LadybugStateRecord[] = [];
 
-  public get culledStateHistory(): ReadonlyArray<LadybugStateRecord> {
+  public get culledStateHistory(): readonly LadybugStateRecord[] {
     return this._culledStateHistory;
   }
   private historyTimes: number[] | null = null;
