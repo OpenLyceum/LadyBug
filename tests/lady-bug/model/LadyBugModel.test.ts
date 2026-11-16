@@ -109,3 +109,38 @@ describe("LadyBugModel circular motion", () => {
     expect(model.circleSizeProperty.value).toBe(CircleSize.LARGE);
   });
 });
+
+describe("recording start snapshots", () => {
+  it.each(["play", "step"])("preserves paused initial edits when starting with %s", (transport) => {
+    const model = new LadyBugModel(new LadyBugPreferencesModel());
+    model.motionTypeProperty.value = MotionType.LINEAR;
+    model.ladybug.setPositionXY(1, 2);
+    if (transport === "play") {
+      model.play();
+      model.step(LadyBugConstants.FIXED_DT);
+    } else {
+      model.stepOnce();
+    }
+    model.rewind();
+    expect(model.timeProperty.value).toBe(0);
+    expect(model.ladybug.position.equals(new Vector2(1, 2))).toBe(true);
+  });
+
+  it("captures a new initial state after Clear and a paused recording branch", () => {
+    const model = new LadyBugModel(new LadyBugPreferencesModel());
+    model.motionTypeProperty.value = MotionType.LINEAR;
+    for (let i = 0; i < 5; i++) {
+      model.stepOnce();
+    }
+    model.clear();
+    const start = model.ladybug.position.copy();
+    model.stepOnce();
+    model.rewind();
+    expect(model.ladybug.position.equals(start)).toBe(true);
+    model.recordingProperty.value = true;
+    model.ladybug.setPositionXY(2, 3);
+    model.stepOnce();
+    model.rewind();
+    expect(model.ladybug.position.equals(new Vector2(2, 3))).toBe(true);
+  });
+});

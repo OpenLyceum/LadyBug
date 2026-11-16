@@ -129,6 +129,16 @@ export class LadyBugModel implements TModel, MoverContext {
   }
 
   private stepInternal(deltaTime: number): void {
+    // Capture paused edits and the initial pose before advancing either clock or motion.
+    if (
+      this.recordingProperty.value &&
+      (this.stateHistory.length === 0 ||
+        !this.isPlayingProperty.value ||
+        (this.stateHistory[this.stateHistory.length - 1]?.time ?? 0) > this.time)
+    ) {
+      this.clearHistoryAfter(this.time);
+      this.recordState();
+    }
     this.time = Math.min(
       this.time + deltaTime,
       this.recordingProperty.value ? this.maxRecordingTime : this.furthestRecordedTimeProperty.value,
@@ -270,6 +280,7 @@ export class LadyBugModel implements TModel, MoverContext {
       this._culledStateHistory.push(record);
     }
     this.stateHistory.push(record);
+    this.historyTimes = null;
     this.historyAddedEmitter.emit();
   }
 
